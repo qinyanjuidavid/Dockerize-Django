@@ -18,6 +18,20 @@ services:
     volumes:
       - staticfiles:/app/staticfiles/
     container_name: trydocker-web
-
+  db:
+    image: postgres
+    restart: always
+    command: -p 5433
+    env_file:
+      - .env
+    environment:
+      - .env
+    expose:
+      - 5433
+    ports:
+      - "5433:5433"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
 volumes:
   staticfiles:
+  dbdata:
