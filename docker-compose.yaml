@@ -15,6 +15,7 @@ services:
     command: sh -c "chmod +x /app/migrate.sh && /app/migrate.sh && /app/collectstatic.sh && /app/entrypoint.sh"
     depends_on:
       - db
+      - redis_db
     volumes:
       - staticfiles:/app/staticfiles/
     container_name: trydocker-web
@@ -32,6 +33,17 @@ services:
       - "5433:5433"
     volumes:
       - dbdata:/var/lib/postgresql/data
+  redis_db:
+    image: redis
+    restart: always
+    expose:
+      - 6388
+    ports:
+      - "6388:6388"
+    volumes:
+      - redis_data:/data
+    entrypoint: redis-server --appendonly yes --port 6380
 volumes:
   staticfiles:
   dbdata:
+  redis_data:
