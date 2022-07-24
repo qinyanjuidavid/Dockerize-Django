@@ -7,3 +7,4 @@
 - `docker-compose run -d app` to run the image
 - `docker-compose up` to run an image
 - `docker-compose up -d --build` to allow new changes to be added
+- `docker exec -it appName /bin/bash`
